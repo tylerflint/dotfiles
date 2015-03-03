@@ -106,7 +106,8 @@ nmap <CR> o<Esc>k
 execute pathogen#infect()
 
 " kalisi color theme
-colorscheme kalisi
+" colorscheme kalisi
+colorscheme molokai
 set background=dark
 set t_Co=256
 
@@ -117,7 +118,7 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
 endif
 
 " airline
-let g:airline_theme='kalisi'
+" let g:airline_theme='kalisi'
 let g:airline#extensions#tabline#enabled = 1
 
 " ctrlp
