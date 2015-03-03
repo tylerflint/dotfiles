@@ -1,6 +1,10 @@
 " Leader
 let mapleader = ","
 
+filetype plugin indent on
+
+set nocompatible
+set encoding=utf-8
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
@@ -11,8 +15,23 @@ set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
+set synmaxcol=800 " don't try to highlight long lines
+set cursorline    " highlight the line of the cursor
+set showcmd     " show partial commands below the status line
+set shell=bash  " avoids munging PATH under zsh
+let g:is_bash=1 " default shell syntax
+set history=200 " remember more Ex commands
+set scrolloff=3 " have some context around the current line always on screen
 
-filetype plugin indent on
+" Allow backgrounding buffers without writing them, and remember marks/undo
+" for backgrounded buffers
+set hidden
+
+" Auto-reload buffers when file changed on disk
+set autoread
+
+" Disable swap files; systems don't crash that often these days
+set updatecount=0
 
 " Make it obvious where 80 characters is
 set textwidth=80
@@ -22,6 +41,20 @@ set colorcolumn=+1
 set number
 set numberwidth=5
 
+"" Whitespace
+set nowrap                        " don't wrap lines
+set tabstop=2                     " a tab is two spaces
+set shiftwidth=2                  " an autoindent (with <<) is two spaces
+set expandtab                     " use spaces, not tabs
+set backspace=indent,eol,start    " backspace through everything in insert mode
+
+"" Searching
+set hlsearch                      " highlight matches
+set incsearch                     " incremental searching
+set ignorecase                    " searches are case insensitive...
+set smartcase                     " ... unless they contain at least one capital letter
+set gdefault                      " have :s///g flag by default on
+
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
@@ -30,6 +63,19 @@ nnoremap <Down> :echoe "Use j"<CR>
 
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<space>
+
+" clear the search buffer when hitting return
+:nnoremap <CR> :nohlsearch<cr>
+
+" yank to system clipboard
+map <leader>y "*y
+
+" paste lines from unnamed register and fix indentation
+nmap <leader>p pV`]=
+nmap <leader>P PV`]=
+
+" In command-line mode, C-a jumps to beginning (to match C-e)
+cnoremap <C-a> <Home>
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
